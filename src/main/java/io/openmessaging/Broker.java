@@ -6,5 +6,4 @@ package io.openmessaging;
  */
 public class Broker {
 
-
 }
