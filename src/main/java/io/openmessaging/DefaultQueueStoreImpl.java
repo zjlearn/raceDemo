@@ -1,6 +1,5 @@
 package io.openmessaging;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -12,21 +11,19 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class DefaultQueueStoreImpl extends QueueStore {
 
-
-    public static Collection<String> EMPTY = new ArrayList<String>();
     Map<String, List<String>> queueMap = new ConcurrentHashMap<String, List<String>>();
 
+
+    /**
+     * 进行消息的合并， 减少消息读写调用的次数
+     * @param queueName 代表queue名字，如果是第一次put，则自动生产一个queue
+     * @param message message，代表消息的内容，评测时内容会随机产生，大部分长度在64字节左右，会有少量消息在1k左右
+     */
     public synchronized void put(String queueName, String message) {
-        if (!queueMap.containsKey(queueName)) {
-            queueMap.put(queueName, new ArrayList<String>());
-        }
-        queueMap.get(queueName).add(message);
+        MessageWriter.write(queueName, message.getBytes());
     }
+
     public synchronized Collection<String> get(String queueName, long offset, long num) {
-        if (!queueMap.containsKey(queueName)) {
-            return EMPTY;
-        }
-        List<String> msgs = queueMap.get(queueName);
-        return msgs.subList((int) offset, offset + num > msgs.size() ? msgs.size() : (int) (offset + num));
+        return null;
     }
 }
