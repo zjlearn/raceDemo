@@ -10,14 +10,12 @@ import java.util.Map;
 public class Flusher {
 
     /**
-     * 循环遍历缓冲池，将数据flush到磁盘中去
+     * 循环遍历缓冲池，将数据flush到磁盘中去.
      */
     public void flush() {
         for (Map.Entry<Long, Iterator> entry : BufferRegister.iteratorMap.entrySet()) {
             Iterator begin, cur = entry.getValue();
-            while (cur.hasNext()){
 
-            }
         }
     }
 }

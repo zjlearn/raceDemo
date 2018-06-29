@@ -1,6 +1,5 @@
 package io.openmessaging.linkedlist;
 
-import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -11,14 +10,9 @@ import java.util.concurrent.ConcurrentHashMap;
 public class BufferRegister {
 
     // 初始化三十个相应的
-    public static Map<Long, Iterator> iteratorMap = new ConcurrentHashMap<>(30);
+    public static Map<Long, ListNode> iteratorMap = new ConcurrentHashMap<>(30);
 
-    public static void register(long threadId, Iterator iterator) {
-        iteratorMap.put(threadId, iterator);
-    }
+    public static Map<Long, ListNode> writerStatus = new ConcurrentHashMap<>(30);
 
-    public Iterator getIterator(long threadId) {
-        return iteratorMap.get(threadId);
-    }
 }
 
