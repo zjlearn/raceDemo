@@ -12,7 +12,10 @@ public class BufferRegister {
     // 初始化三十个相应的
     public static Map<Long, ListNode> iteratorMap = new ConcurrentHashMap<>(30);
 
-    public static Map<Long, ListNode> writerStatus = new ConcurrentHashMap<>(30);
+    /**
+     * 保存每个list的空闲状态次数。 当空闲大于2时强制flush所有的数据
+     */
+    public static Map<ListNode, Integer> writerStatus = new ConcurrentHashMap<>(30);
 
 }
 
